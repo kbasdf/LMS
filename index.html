@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<script>
+ let vyt = '<table><tr><th>Name</th><th>Access</th><th>Status</th></tr><tr>';
+let stringToHTML = function (str) {
+var parser = new DOMParser();
+var doc = parser.parseFromString(str, 'text/html');
+return doc.body;
+};
+
+let master_flag  = 0
+
+function checkout(){
+    if (master_flag == 0){
+        master_flag = master_flag + 1;
+        console.log('happy !!');
+        let varix123;
+        let xx78 ='';
+        xx78 = document.getElementById("bravo");
+        varix123 = xx78.innerText;
+        console.log(varix123);
+        console.log(varix123);
+        var x90 = varix123.length;
+        let yyy = 2;
+        let varixlast= varix123.length;
+    
+        let flag_number = 2;
+        let flag_for_3 = 0 ;
+        while (yyy <= varixlast -2){
+            console.log("while called");
+            let xyui = '';
+            if(varix123[yyy]=="\\"){       
+                if (varix123[yyy+1]=='n') {
+                    flag_for_3 = flag_for_3 + 1;
+                    if ((flag_for_3  == 3)|| ( yyy == varixlast-2)){
+                        console.log("inside loop 3");
+                        flag_for_3 = 0;
+                        console.log('inside the loop3');
+                        //xyui = varix123.slice(flag_number,yyy);
+                        vyt = vyt.concat('<td>');
+                        vyt = vyt.concat(varix123.slice(flag_number,yyy));
+                        vyt = vyt.concat('</td>');
+                        vyt = vyt.concat('<tr>');
+                        //xyui = `<td>${xyui}</td></tr><tr>`;
+                        //vyt = vyt + xyui ;
+                        if (yyy == varixlast-3 ){
+                            console.log('asdfadsfdsf');
+                            vyt = vyt +`</tr>`;
+                            break;
+                        };
+                        
+                            flag_number = yyy;
+                            yyy = yyy+2;
+                        }
+                    else{
+                        //xyui = varix123.slice(flag_number,yyy);
+                        //xyui = `<td>${xyui}</td>`;
+                        vyt = vyt.concat('<td>');
+                        vyt = vyt.concat(varix123.slice(flag_number,yyy));
+                        vyt = vyt.concat('</td>');
+                        
+                    // vyt = vyt + xyui ;
+                    flag_number = yyy;
+                    yyy = yyy+2;
+                        };
+                }
+            }
+                
+            else{
+                yyy = yyy+1;
+            }
+            
+        };
+
+
+    //vyt = vyt.replace(/[\n\r]+/g, ' ');
+        buy = vyt.length;
+        vyt = vyt +'</table>'
+        vyt = vyt.replace(/(?:\\[rn]|[\r\n]+)+/g, "");
+        vyt = vyt.replace(/'*/g, "");
+        vyt = vyt.replace(/,*/g, "");
+        vyt = vyt.substr(0,buy -4);
+        console.log('this is vyt' + vyt);
+        buy = vyt.length;
+        let  itt = 0;
+        let tti = '';
+        while (itt<buy){
+            if ((vyt[itt] =='\r') || (vyt[itt]=='\n')){
+                itt = itt + 1 ; 
+        }
+            else{
+            tti = tti.concat(vyt[itt]);
+                itt = itt+1;
+            }
+
+
+    };}
+}
+
+console.log('This is tti' + vyt);
+
+console.log("more happy");
+function mictest(){
+    var x = document.getElementById("Huzaka").innerText;
+    var xioxio = document.getElementById("Huzaka");
+    var y1 = document.getElementById("id3");
+    var y55 = document.getElementById("id55");
+    var id1111 = document.getElementById("id11");
+    var idi555 = document.getElementById("id5");
+    if (x == '0'){
+        console.log("it is zero");
+        }
+    else{
+        console.log('Something is in there');
+
+        id1111.style.display='none';
+        y1.style.display = 'block';
+        xioxio.style.display = 'block';
+        y55.style.display ='none';
+        idi555.style.display='block';
+    }
+};
+
+var gameStart = null,
+  gameSpeed = null,
+  gameArea = null,
+  gameAreaContext = null,
+  gameAreaWidth = 0,
+  gameAreaHeight = 0,
+  cellWidth = 0,
+  playerScore = 0,
+  snake = null,
+  snakeFood = null,
+  snakeDirection = null,
+  speedSize = 0,
+  timer = null;
+
+function initialize() {
+  gameStart = document.querySelector("#gameStart");
+  gameSpeed = document.querySelector("#gameSpeed");
+  gameArea = document.querySelector("#gameArea");
+  gameAreaContext = gameArea.getContext("2d");
+  gameAreaWidth = 400;
+  gameAreaHeight = 600;
+  cellWidth = 20;
+  gameArea.width = gameAreaWidth;
+  gameArea.height = gameAreaHeight;
+
+  gameStart.onclick = function () {
+    this.disabled = true;
+    startGame();
+  }
+}
+
+function startGame() {
+  playerScore = 0;
+  snakeDirection = "right";
+  speedSize = parseInt(gameSpeed.value);
+
+  if (speedSize > 9) {
+    speedSize = 9;
+  } else if (speedSize < 0) {
+    speedSize = 1;
+  }
+
+  snake = [];
+  snake.push({ x: 0, y: cellWidth });
+
+  createFood();
+
+  clearInterval(timer);
+  timer = setInterval(createGameArea, 500 / speedSize);
+}
+
+function createFood() {
+  snakeFood = {
+    x: Math.round(Math.random() * (gameAreaWidth - cellWidth) / cellWidth),
+    y: Math.round(Math.random() * (gameAreaHeight - cellWidth) / cellWidth),
+  };
+}
+
+function createGameArea() {
+  var snakeX = snake[0].x;
+  var snakeY = snake[0].y;
+
+  gameAreaContext.fillStyle = "#FFFFFF";
+  gameAreaContext.fillRect(0, 0, gameAreaWidth, gameAreaHeight);
+  gameAreaContext.strokeStyle = "#000000";
+  gameAreaContext.strokeRect(0, 0, gameAreaWidth, gameAreaHeight);
+
+  if (snakeDirection == "right") {
+    snakeX++;
+  } else if (snakeDirection == "left") {
+    snakeX--;
+  } else if (snakeDirection == "down") {
+    snakeY++;
+  } else if (snakeDirection == "up") {
+    snakeY--;
+  }
+
+  if ((snakeX == -1) || (snakeX == gameAreaWidth / cellWidth) || (snakeY == -1) || (snakeY == gameAreaHeight / cellWidth) || Control(snakeX, snakeY, snake)) {
+    writeScore();
+    clearInterval(timer);
+    gameStart.disabled = false;
+    return;
+  }
+
+  if (snakeX == snakeFood.x && snakeY == snakeFood.y) {
+    var newHead = { x: snakeX, y: snakeY };
+    playerScore += speedSize;
+    createFood();
+  } else {
+    var newHead = snake.pop();
+    newHead.x = snakeX;
+    newHead.y = snakeY;
+  }
+
+  snake.unshift(newHead);
+
+  for (var i = 0; i < snake.length; i++) {
+    createSquare(snake[i].x, snake[i].y);
+  }
+
+  createSquare(snakeFood.x, snakeFood.y);
+}
+
+function Control(x, y, array) {
+  for (var i = 0; i < array.length; i++) {
+    if (array[i].x == x && array[i].y == y) return true;
+  }
+  return false;
+}
+
+function writeScore() {
+  gameAreaContext.font = "30px arial";
+  gameAreaContext.fillStyle = "#000000";
+  gameAreaContext.fillText("Score: " + playerScore, (gameAreaWidth / 2) - 100, gameAreaHeight / 2);
+}
+
+function createSquare(x, y) {
+  gameAreaContext.fillStyle = "#000000";
+  gameAreaContext.fillRect(x * cellWidth, y * cellWidth, cellWidth, cellWidth);
+}
+
+function changeDirection(e) {
+  var keys = e.which;
+  if (keys == "40" && snakeDirection != "up") snakeDirection = "down";
+  else if (keys == "39" && snakeDirection != "left") snakeDirection = "right";
+  else if (keys == "38" && snakeDirection != "down") snakeDirection = "up";
+  else if (keys == "37" && snakeDirection != "right") snakeDirection = "left";
+}
+
+window.onkeydown = changeDirection;
+window.onload = initialize;
+function boom(){
+    
+    console.log('inside boom');
+    xx7811 = document.getElementById("bravo1");
+    xx7811.innerHTML = vyt;
+};
+    
+        </script>
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+        }
+        
+        #id1{
+            
+            float:left;
+            cursor: default;
+            position: absolute;
+            padding:2%;
+            color:000000;
+            background-color: white;
+            width:12rem;
+            height:67.5rem;
+            align-items: stretch;
+    
+
+            left:0rem;
+            border:solid black;
+            text-align: center;
+            font-size: 15px;
+            
+        }
+        
+       #id11{
+           height:1.95%;
+           position:absolute;
+           top: 2%;
+           width:80%;
+           padding:2%;
+           padding-right:1rem;
+           padding-left:1rem;
+           margin-right:1rem;
+           margin-left:1rem;
+           left:-5rem;
+           border:0.5rem;
+           margin:0.5rem;
+           background-color: coral;
+           transform:rotate(-45deg);
+           text-align: center;
+           
+
+       }
+       #id22{
+           height:1.95%;
+           position:absolute;
+           top: 6%;
+           width:70%;
+           padding:2%;
+           padding-right:50%;
+           padding-left:50%;
+           margin-right:3rem;
+           margin-left:3rem;
+           left:-10rem;
+           border:0.25rem;
+           margin:0.5rem;
+           background-color: coral;
+           transform:rotate(-45deg);
+           text-align: center;
+           
+       }
+       #id33{
+        height:1.95%;
+           position:absolute;
+           top: 8%;
+           width:65%;
+           padding:2%;
+           padding-right:70%;
+           padding-left:70%;
+           margin-right:3rem;
+           margin-left:3rem;
+           left:-10rem;
+           border:0.25rem;
+           margin:0.5rem;
+           background-color: coral;
+           transform:rotate(-45deg);
+           text-align: center;
+           
+       }
+        #gugu{
+            position:absolute;
+            top:18.75rem;
+            right:75%;
+
+
+        }
+        .id2{
+    float:left;
+    left:18rem;
+    top:10px;
+    height:100%;
+    display: none;
+    position:sticky;
+    width:60%;
+    background-color: blue;
+  }
+
+  .id3{
+       float:left;
+    left:18rem;
+    top:10px;
+    height:100%;
+    display: none;
+    position:sticky;
+    width:60%;
+    background-color: orange;
+  }
+
+        .button{
+            position: absolute;
+            top:31.25rem;
+            left:4.375rem;
+        }
+
+#id4{
+            
+            float:right;
+            cursor: default;
+            position: absolute;
+            padding:2%;
+            color:000000;
+            background-color: white;
+            width:20%;
+            display: none;
+            height:100%;
+            align-items: stretch;
+            left:85%;
+            border:solid black;
+            background-color: blue;
+            text-align: center;
+            font-size: 15px;
+
+}
+#div_admin{
+    width:90%;
+    height:22%;
+
+
+}
+#div_admin.bravo2.input1{
+    float:left;
+
+}
+#div_admin.bravo2.input1{
+    float:right;
+
+}
+
+
+#id5{
+    float:right;
+    top:30px;
+    right:0px;
+    width:7%;
+    height:125px;
+    border:black;
+    border-width: 2px;
+    position:fixed;
+    display:none;
+    cursor:pointer;
+    background-color: aquamarine;
+}
+.button1{
+    text-align: center;
+    height:31px;
+    width:60px;
+    margin:0px;
+    padding:0px;
+
+
+}
+
+
+    </style>
+</head>
+<body>
+    
+    <div class="id1" id="id1">
+        <div id ="id11"
+        onclick="gege();" style="cursor:pointer;"><b>login / Register</b>
+        </div>
+        <div id ="id22"><b>Courses List </b></div>
+        <div id ="id33" onclick="get_game();" style="cursor:pointer">
+        <b>Kill Time </b></div>
+    </div>
+    <p>--- Users Below --------</p>
+    <div class="id4"  id="id4">
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>        
+        <br/>
+        <br/>    
+        <br/>
+        <div id ="div_admin" class="div_admin">
+        <form id ="bravo2" class="bravo2">
+        <input id ="input1" class = "input1" type ="text" id ='UserID' name = "UserID">
+        <br/>
+        <input id ="input1" class = "input1"type ="text" id ="Name" name ="Name">
+        <br/>
+        <input id ="input1" class = "input1" type ="text" id ="Access" name="Access">
+        <br/>
+        <input id ="input1" class = "input1" type ="text" id = "Status" name="Status">
+        <br/>
+        <br/>
+        <button type="submit" id = "button1" class = "button1" value="Add User" name="Submit">Add User</button>
+    
+        <button type="submit" id = "button1" class = "button1" value ="Delete User" name="Submit">Del User</button>
+        
+        <button type="submit" id = "button1" class = "button1" value="Modify User" name="Submit">Modify</button>
+        
+        <button type="submit" id = "button1" class = "button1" value="Refresh the Data" name="Submit">Refresh</button>
+        </form>
+    </div>
+
+
+        <br/>    
+        <br/>
+        <br/>    
+        <br/>
+        <p> ---- User Data Below ---- </p>
+        <br/>    
+       
+        <div id ="bravo" class="bravo" style="display:none;">{{value2}}</div> 
+        <div  id="bravo1" class ="bravo1"></div>
+     </div>
+    <div  class="id3" id="id3">
+        <p id ="Huzaka" style='display:none;'>{{value1}}</p>
+  
+        <div id = "id55">
+         <form  method="POST">
+        <input type="username" id="username" name="username"><br>
+        <div id ="gugu2">
+        <input type="password" id="password" name="password"></div> 
+        <div><button type="submit" id="submit">Log in</button></div> 
+
+    </form>
+
+    </div>
+    </div>
+
+    <div id="id5" class ="id5" onclick="gege1(); checkout(); boom();">
+        <p>This is visible Only to the Admin !</p>
+    </div>
+    <div  class="id2" id="id2" style="display:none;" >
+    Speed: <input type="number" id="gameSpeed" value="5" min="1" max="9" step="1" />
+    <input type="button" value="Start" id="gameStart" />
+    <p> <b>Instructions -</b> User Up/Down/Left/Right Keys to move and build the Snake</p>
+    <br /> <br />
+    <canvas id="gameArea"></canvas>
+    </div>
+    
+   
+<script>
+let id4_open_flag = 0;
+mictest();
+function gege1(){
+    var idhu44 = document.getElementById("id4");
+    if (id4_open_flag == 0){
+        
+        idhu44.style.display = 'block';
+        id4_open_flag = 1;
+    }
+    else{
+        idhu44.style.display ='none';
+        id4_open_flag = 0;
+    };
+};
+
+function gege(){
+                var element = document.getElementById("id3");
+
+                setTimeout(function changeStyle(){
+                element.style.display = 'block';
+                },1000)
+              };
+        
+function get_game(){
+document.getElementById("id2").style.display = 'block';
+document.getElementById("id3").style.display = 'none';
+          };
+
+        
+</script>
+</body>
